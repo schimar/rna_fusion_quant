@@ -8,15 +8,16 @@ Snakemake workflow for RNA analysis of gene fusions and quantification of transc
 
 run on your local machine:  
 1) set up and configure units.tsv in config/ folder  
-2) identify the run folder (where the sequencer saved your run data)  
-3) do a dry-run  
+2) add your genome & annotation of choice to the resources/ folder  
+3) identify the run folder (where the sequencer saved your run data)  
+4) do a dry-run and check if the right jobs are to be run  
 
 ```
 snakemake -npr --config runID="20230125_RNASeq"
 
 ```
 
-4) run the job locally (choose the correct runID - this can be found in the SampleSheet.csv)
+5) run the job locally (choose the correct runID - this can be found in the SampleSheet.csv)
 ```
 time snakemake -j48 --config runID="20230125_RNASeq"
 ```
