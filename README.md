@@ -16,7 +16,7 @@ snakemake -npr --config runID="20230125_RNASeq"
 
 ```
 
-4) run the job locally (
+4) run the job locally (choose the correct runID - this can be found in the SampleSheet.csv)
 ```
 time snakemake -j48 --config runID="20230125_RNASeq"
 ```
