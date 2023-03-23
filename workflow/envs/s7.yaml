@@ -1,45 +1,49 @@
-name: bsa 
+name: smk7 
 channels:
   - conda-forge
   - bioconda
   - dranew
+  - bih-cubi
 dependencies:
   - python==3.9.1
   - snakemake-minimal >=7
   - snakemake-wrapper-utils
-# classics 
-  - pigz
-  - pandas 
-  - numpy #=1.20.1
-  - seaborn #=0.11.1
-  - matplotlib #=3.3.4
-  - sambamba #=0.6.8
-  - rseqc #=4.0
-  - biobambam
-  - samtools =1.16
-  - htslib =1.16
-  - bcl2fastq
+    #- starseqr
+    #- star-fusion
   - fastqc
   - multiqc
-  - bbmap
   - cutadapt #  =4.2
-  - gffutils #=0.1
-  - megahit
-  - spades
-  - quast
-  - prokka
-  - kraken2
-  - bracken
-  - krona
-  - kat
+  - bbmap
+    #- bwa-mem2
+  - bwa
     #- graphviz
-    #  - ucsc-gtftogenepred 
-    #  - gffread 
-    #  - arriba
-    #  - snpeff 
-    #  - picard
+  - pigz
+  - samtools #=1.16
+  - htslib #=1.16
+  - pandas 
+  - numpy #=1.20.1
+  - sambamba #=0.6.8
+  - gffutils #=0.10
+  - rseqc #=4.0
+  - biobambam
+    #- velvet 
+  - star 
+    #- salmon
+    #- kallisto
+  - ucsc-gtftogenepred 
+  - gffread 
+  - seaborn #=0.11.1
+  - matplotlib #=3.3.4
+  - arriba
+  - snpeff 
+  - bcl2fastq2
+  
+    
+    
+  #- picard
   ##- numexpr #=2.7.2
-  #   - vcftools #=0.1.16
+  - vcftools #=0.1.16
+    #- htseq
     # - bioconductor-biomart =2.46
   # - r-tidyverse =1.3
   #- pip
