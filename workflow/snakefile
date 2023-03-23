@@ -1,0 +1,69 @@
+from snakemake.utils import min_version
+
+##### set minimum snakemake version #####
+min_version("7.0.0")
+
+
+##### setup report #####
+configfile: "../config/config.yaml"
+
+
+report: "report/workflow.rst"
+
+
+##### setup singularity #####
+
+
+# this container defines the underlying OS for each job when using the workflow
+# with --use-conda --use-singularity
+# container: "docker://continuumio/miniconda3"
+
+
+##### load rules #####
+
+
+include: "rules/common.smk"
+include: "rules/bcl2fastq.smk"
+include: "rules/ref.smk"
+include: "rules/trim.smk"
+include: "rules/qc.smk"
+include: "rules/align.smk"
+include: "rules/fusion.smk"
+include: "rules/quant.smk"
+######
+##include: "rules/diffexp.smk"
+#include: "rules/star_2pass.smk"
+#include: "rules/star_2pass_singleLane.smk"
+
+#ids = "SRR3091420 SRR3091421".split()
+##### target rules #####
+#star_files = glob_wildcards("results/star/{sample}/alnd.srtd.out.bam")
+
+rule all:
+    input:
+        ###get_final_output(),
+        "resources/genome.fa",
+	    "results/qc/multiqc_report.html",
+        "resources/genome.gtf",
+	    multiext("resources/genome.fa", ".amb", ".ann", ".bwt", ".pac", ".sa", ".fai"),	#, ".idx"),
+	    directory("resources/star_genome"),
+        expand("results/star/{sample}/aligned.out.bam", sample= list(samples_dict.keys())),#['Z22009056_20ng_BR_S11'], unit= ['L001', 'L002']),
+	    expand("results/samtools/flagstat/{sample}.bam.flagstat", sample= list(samples_dict.keys())),	#['H22053532_50ng_BR_S12']),
+	    expand("results/arriba/{sample}/fusions.tsv", sample= list(samples_dict.keys())), #'H22053532_50ng_BR_S12']),
+	    #expand("results/fq_cats/{sample}_{read}_catL.fq.gz", sample= list(samples_dict.keys()), read= ["R1", "R2"]),
+	    ##expand("results/salmon/{sample}/quant.sf", sample= list(samples_dict.keys())),	#['Z22007658_20ng_BR_S7', 'K562-100ng-1plex-Rep2_S10', 'K562-100ng-1plex-Rep1_S4']),
+	    expand("results/bcl2fq/{runid}/{sample}_{lane}_{read}_001.fastq.gz", sample = list(samples_dict.keys()), lane = ['L001', 'L002'], read = ['R1', 'R2'], runid = config['runID']),
+
+
+
+ ##expand("results/htseq/{sample}_HTSeq.csv", sample= list(samples_dict.keys())),
+
+
+#### intermittant files (consolidate later)
+	    ##expand("results/trimmed/{sample}_{unit}_{read}.fastq.gz", sample=['Z22007658_20ng_BR_S7'], read= ['R1', 'R2'], unit= ['L001', 'L002']),
+	    	    ##### star_2pass_singleLane
+				#expand("results/samtools/flagstat/{sample}_p2/alnd.srtd.bam.flagstat", sample= list(samples_dict.keys())[2]),	#['H22053532_50ng_BR_S12']),
+	    	    #expand("results/star/{sample}_p1/sj.out.tab", sample= list(samples_dict.keys())[6:8]),
+				#expand("results/star/sj/{sample}_p1/sj.filtered.tab", sample= list(samples_dict.keys())[6:8]),
+				#expand("results/star/{sample}_p2/aligned.sortedByCoord.out.bam", sample= list(samples_dict.keys())[6:8]),
+
