@@ -12,7 +12,7 @@ run on your local machine:
 3) do a dry-run  
 
 ```
-snakemake -npr --config 
+snakemake -npr --config runID="20230125_RNASeq"
 
 ```
 
