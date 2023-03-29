@@ -145,17 +145,6 @@ rule rseqc_readgc:
     shell:
         "read_GC.py -i {input} -o {params.prefix} > {log} 2>&1"
 
-rule rseqc_tin:
-    input:
-        bam = "results/star/{sample}/aligned.out.bam",
-        bed = "results/qc/rseqc/annotation.bed",
-    output:
-        summ = "results/qc/rseqc/{sample}.tin.summary.txt",
-        xls = "results/qc/rseqc/{sample}.tin.xls",
-    priority: 1
-    log:
-        "logs/rseqc/tin.log"
-    1
 
 rule multiqc:
     input:

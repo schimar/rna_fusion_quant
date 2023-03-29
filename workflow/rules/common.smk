@@ -6,6 +6,7 @@ from snakemake.utils import validate
 
 #ftp = FTP.RemoteProvider()
 fqDir = ""   #"/mnt/illumina/230209_A01272_0035_BHTVFGDRX2"
+#fqDir = "/mnt/illumina/development/bench_data/rna/fq"
 runid = config['runID']
 
 validate(config, schema="../../config/schemas/config.schema.yaml")

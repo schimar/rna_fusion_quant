@@ -26,7 +26,6 @@ rule arriba:
     wrapper:
         "v1.23.4/bio/arriba"
 
-
 rule catL_fqs:
     input: 
         fq1 = '/'.join([fqDir, 'Fastq/{sample}_L001_{read}_001.fastq.gz']), 
@@ -53,16 +52,8 @@ rule starseqr:
       genomeDir="resources/star_genome",
       gtf="resources/genome.gtf",
     output:
-      directory("results/starseqr/{sample}/") 
+      
     shell:
       """
       starseqr.py -1 {fq1} -2 {fq2} -m 1 -p  -t 12 -i {genomeDir} -g {gtf} -r {genome} -vv
       """
-
-
-
-rule star_fusion:
-    input:
-      fq
-    output:
-
